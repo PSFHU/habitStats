@@ -6,7 +6,7 @@ You also can set up goals on the progress.
 
 <details>
     <summary>Magyar</summary>
-    Az alkalmazáson követni lehet a szokásainkat statisztikailag.\
+    Az alkalmazáson követni lehet a szokásainkat statisztikailag.<br>
     A helyett, hogy egy nap csak bejelölnénk a szokásunk teljesítését, itt követni lehet a fejlődést is.
 </details>
 
@@ -29,7 +29,7 @@ Select or create your own unit type to track progress like your max weight on th
 
 <details>
     <summary>Magyar</summary>
-    Az haladás kategóriákba szervezhető, így például az edzés adatok külön gyűjthetők a többi közül.\
+    Az haladás kategóriákba szervezhető, így például az edzés adatok külön gyűjthetők a többi közül.<br>
     Míg a saját mértékegységek készítése abban segít, hogy értelmezhetően lássd eredményeid.
 </details>
 
@@ -40,8 +40,8 @@ If its a bad habit you can set up goals for doing less with customizable logic.
 
 <details>
     <summary>Magyar</summary>
-    Ahhoz, hogy egy szokást vagy képességet elmélyits a célok elengedhetetlenek.\
-    Vagy egy rossz berögződésről való leszokás is igényel egy célt.\
+    Ahhoz, hogy egy szokást vagy képességet elmélyits a célok elengedhetetlenek.<br>
+    Vagy egy rossz berögződésről való leszokás is igényel egy célt.<br>
     Tehát létrhozhatunk célokat, akkár saját feltétel szerint is.
 </details>
 
@@ -98,7 +98,7 @@ The backend can be split to multiple instances or tunned to usage.
 
 <details>
     <summary>Magyar</summary>
-    Ha a szolgáltatást sok felhasználó használja vagy nagy az adatforgalom a szerveren.\
-    A háttér környezet szétosztható és a szolgáltatás részek külön szervereken is futtathatók.\
+    Ha a szolgáltatást sok felhasználó használja vagy nagy az adatforgalom a szerveren.<br>
+    A háttér környezet szétosztható és a szolgáltatás részek külön szervereken is futtathatók.<br>
     Adatbázis tekintetben a gyorsító tárazás finomhangolható.
 </details>
