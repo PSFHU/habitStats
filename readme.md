@@ -64,15 +64,6 @@ See your progress from months to weeks and get motivated or see where you should
     Haladásunk követhetjük hónapokra és hetekre tekintve.
 </details>
 
-### Get notified on progress \ Értesítések a fejlődésről
-
-Day by day or on week by week, you can setup to recive a summary on your current goals.
-
-<details>
-    <summary>Magyar</summary>
-    Egy visszatekintőt kérhetünk napra vagy hétre, ami összefoglalja a teljesítményünk.
-</details>
-
 ### You own your data \ Az adataid nálad vannak
 
 The service can be self-hosted and easily deployed on your own computer.
@@ -80,27 +71,6 @@ The service can be self-hosted and easily deployed on your own computer.
 <details>
     <summary>Magyar</summary>
     A szolgáltatás saját gépen is futtatható, könnyen telepíthető.
-</details>
-
-### Fast access over recent data \ Gyors adat elérés
-
-Service uses a traditional POSTGRESQL database and an In-memory Redis database for quick access for recent data.
-
-<details>
-    <summary>Magyar</summary>
-    A szolgáltatás egy tradicionális POSTGRESQL adatbázison hosszútávra és egy memória alapu Redis adatbázison fut a gyakori adatok gyors adatelérése érdekében.
-</details>
-
-### Scaleable \ Skálázható
-
-If you decide to use the service with multiple users or use a lot of datasources.\
-The backend can be split to multiple instances or tunned to usage.
-
-<details>
-    <summary>Magyar</summary>
-    Ha a szolgáltatást sok felhasználó használja vagy nagy az adatforgalom a szerveren.\
-    A háttér környezet szétosztható és a szolgáltatás részek külön szervereken is futtathatók.\
-    Adatbázis tekintetben a gyorsító tárazás finomhangolható.
 </details>
 
 ## Plans \ Tervek
