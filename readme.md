@@ -77,8 +77,8 @@ The service can be self-hosted and easily deployed on your own computer.
 
 ### Database \ Adatbázis
 
-![Database](./doc/Database.png)
+![Database](./res/Database.png)
 
 ### Model \ Modell
 
-![Model](./doc/Entity.png)
+![Model](./res/Entity.png)
