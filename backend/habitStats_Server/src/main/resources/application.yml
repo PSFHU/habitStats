@@ -1,0 +1,16 @@
+server:
+  port: 8081
+spring:
+  jpa:
+    generate-ddl: false
+    defer-datasource-initialization: true
+    hibernate:
+      ddl-auto: none
+  datasource:
+    driver-class-name: org.hsqldb.jdbc.JDBCDriver
+    url: jdbc:hsqldb:mem:habitstats;DB_CLOSE_DELAY=-1
+    username: sa
+    password:
+  sql:
+    init:
+      mode: always
