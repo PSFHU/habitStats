@@ -1,16 +1,19 @@
 server:
-  port: 8081
+  port: 8085
+springdoc:
+  swagger-ui:
+    disable-swagger-default-url: true
 spring:
-  jpa:
-    generate-ddl: false
-    defer-datasource-initialization: true
-    hibernate:
-      ddl-auto: none
   datasource:
-    driver-class-name: org.hsqldb.jdbc.JDBCDriver
-    url: jdbc:hsqldb:mem:habitstats;DB_CLOSE_DELAY=-1
-    username: sa
-    password:
-  sql:
-    init:
-      mode: always
+    url: jdbc:postgresql://localhost:5432/postgres?schema=public
+    username: postgres
+    password: Password111
+    driver-class-name: org.postgresql.Driver
+  # datasource:
+  #   driver-class-name: org.hsqldb.jdbc.JDBCDriver
+  #   url: jdbc:hsqldb:mem:habitstats;DB_CLOSE_DELAY=-1
+  #   username: sa
+  #   password: secret
+  # sql:
+  #   init:
+  #     mode: never

@@ -1,12 +1,14 @@
+/*
 package pte.mik.habitstatsserver.controller;
 
 import lombok.AllArgsConstructor;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import pte.mik.habitstatsserver.dto.UserDto;
 import pte.mik.habitstatsserver.entity.User;
 import pte.mik.habitstatsserver.service.UserService;
 
-import javax.websocket.server.PathParam;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,7 +17,8 @@ import java.util.Optional;
 @RequestMapping("/api/user")
 public class UserController {
 
-    private final UserService userService;
+    @Autowired
+    private UserService userService;
 
     @GetMapping
     public List<User> listAllUser(){
@@ -28,12 +31,13 @@ public class UserController {
     }
 
     @PutMapping
-    public void createUser(@RequestBody UserDto userDto){
-        userService.createUser(userDto);
+    public void registerUser(@RequestBody User user){
+        userService.registerUser(user);
     }
 
     @DeleteMapping
-    public void deleteUser(@RequestBody UserDto userDto){
-        userService.deleteUser(userDto);
+    public void deleteUserById(@RequestBody Integer id){
+        userService.deleteUser(id);
     }
 }
+*/

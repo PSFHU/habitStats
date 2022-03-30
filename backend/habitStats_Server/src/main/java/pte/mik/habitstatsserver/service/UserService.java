@@ -1,3 +1,4 @@
+/*
 package pte.mik.habitstatsserver.service;
 
 import lombok.AllArgsConstructor;
@@ -18,7 +19,8 @@ import java.util.Optional;
 @AllArgsConstructor
 public class UserService {
 
-    private final UserRepository userRepository;
+    @Autowired
+    private UserRepository userRepository;
 
     public List<User> listAllUser(){
         return userRepository.findAll();
@@ -28,13 +30,13 @@ public class UserService {
         return userRepository.findById(id);
     }
 
-    public void createUser(UserDto userDto){
-        User user = new ModelMapper().map(userDto,User.class);
+    public void registerUser(User user) {
         userRepository.save(user);
     }
 
-    public void deleteUser(UserDto userDto){
-        userRepository.deleteById(userDto.getId());
+    public void deleteUser(Integer id) {
+        userRepository.deleteById(id);
     }
 
 }
+*/
