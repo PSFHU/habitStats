@@ -1,12 +1,13 @@
-version: '3.8'
+version: '3.3'
 
 services:
   postgres:
-    image: postgres:latest
-    container_name: 'habitGoals-postgres'
+    image: postgres:14.2-alpine
+    container_name: 'habitStats-postgres'
     environment:
       - POSTGRES_PASSWORD=Password111
     volumes:
       - ./initdb:/docker-entrypoint-initdb.d:ro
     ports:
       - "5432:5432"
+

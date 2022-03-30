@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS user (
+CREATE TABLE IF NOT EXISTS users (
   id            SERIAL NOT NULL PRIMARY KEY,
   username      VARCHAR(255) NOT NULL,
   password      VARCHAR(255) NOT NULL
@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS stat (
   stat_name         VARCHAR(255) NOT NULL,
   unit_type_id      BIGINT NOT NULL REFERENCES unit_type (id),
   stat_category_id  BIGINT NOT NULL REFERENCES stat_category (id),
-  user_id           BIGINT NOT NULL REFERENCES user (id)
+  user_id           BIGINT REFERENCES users (id)
 );
 
 CREATE TABLE IF NOT EXISTS progress (
@@ -54,6 +54,6 @@ CREATE TABLE IF NOT EXISTS goal_stat (
 
 CREATE TABLE IF NOT EXISTS user_role (
   id            SERIAL NOT NULL PRIMARY KEY,
-  user_id       BIGINT NOT NULL REFERENCES user (id),
+  user_id       BIGINT NOT NULL REFERENCES users (id),
   role_id       BIGINT NOT NULL REFERENCES roles (id)
 );
