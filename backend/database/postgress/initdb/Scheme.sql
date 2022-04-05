@@ -32,14 +32,14 @@ CREATE TABLE IF NOT EXISTS goal (
 CREATE TABLE IF NOT EXISTS stat (
   id                SERIAL NOT NULL PRIMARY KEY,
   stat_name         VARCHAR(255) NOT NULL,
-  unit_type_id      BIGINT NOT NULL REFERENCES unit_type (id),
-  stat_category_id  BIGINT NOT NULL REFERENCES stat_category (id),
+  unit_type_id      BIGINT REFERENCES unit_type (id),
+  stat_category_id  BIGINT REFERENCES stat_category (id),
   user_id           BIGINT REFERENCES users (id)
 );
 
 CREATE TABLE IF NOT EXISTS progress (
   id                    SERIAL NOT NULL PRIMARY KEY,
-  stat_id               BIGINT NOT NULL REFERENCES stat (id),
+  stat_id               BIGINT NOT NULL REFERENCES stat (id) ON DELETE CASCADE,
   progress_value        NUMERIC NOT NULL,
   progress_timestamp    TIMESTAMP NOT NULL DEFAULT current_timestamp
 );
@@ -49,11 +49,10 @@ CREATE TABLE IF NOT EXISTS progress (
 CREATE TABLE IF NOT EXISTS goal_stat (
   id            SERIAL NOT NULL PRIMARY KEY,
   goal_id       BIGINT NOT NULL REFERENCES goal (id),
-  stat_id       BIGINT NOT NULL REFERENCES stat (id)
+  stat_id       BIGINT NOT NULL REFERENCES stat (id) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS user_role (
   id            SERIAL NOT NULL PRIMARY KEY,
-  user_id       BIGINT NOT NULL REFERENCES users (id),
   role_id       BIGINT NOT NULL REFERENCES roles (id)
 );
