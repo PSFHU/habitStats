@@ -19,9 +19,8 @@ public class UnitTypeService {
 
     public List<UnitType> listAll(){return unitTypeRepository.findAll();}
 
-    // TODO It throws errors, fix it
     public UnitType getById(Integer id){
-        return unitTypeRepository.getById(id);
+        return unitTypeRepository.findById(id).get();
     }
 
     public String create(UnitType unitType){ return tryFunction(() -> unitTypeRepository.save(unitType));}

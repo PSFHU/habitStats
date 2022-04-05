@@ -24,7 +24,7 @@ public class StatCategoryService {
     }
 
     public StatCategory getCategoryById(Integer id){
-        return categoryRepository.getById(id);
+        return categoryRepository.findById(id).get();
     }
 
     public String createCategory(StatCategory statCategory) {

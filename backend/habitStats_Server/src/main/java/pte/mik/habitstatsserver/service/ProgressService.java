@@ -26,7 +26,7 @@ public class ProgressService {
     public List<Progress> getByStatId(Integer statId) { return progressRepository.getByStatId(statId);}
 
     public Progress getById(Integer id){
-        return progressRepository.getById(id);
+        return progressRepository.findById(id).get();
     }
 
     public String create(Progress progress) {
