@@ -23,6 +23,9 @@ public class StatController {
         return statService.listAllStat();
     }
 
+    @GetMapping("/{id}")
+    public Stat getByStatId(@PathVariable("id") Integer id){ return statService.getStatById(id);}
+
     @PostMapping
     public String addStat(@RequestBody ActionStatDto stat) {
         return statService.addStat(stat);

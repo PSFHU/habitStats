@@ -46,6 +46,8 @@ public class StatService {
         return statRepository.findAll();
     }
 
+    public Stat getStatById(Integer id){ return statRepository.findById(id).get();}
+
     public String addStat(ActionStatDto stat) {
         Stat newStat = this.mapper.map(stat,Stat.class);
         return tryFunction(() -> statRepository.save(newStat));
