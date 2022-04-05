@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -27,6 +28,16 @@ public class Stat {
     @OneToMany(mappedBy = "stat", fetch = FetchType.LAZY)
     @Getter
     private List<Progress> progressList;
+
+    @JsonManagedReference
+    @ManyToMany(cascade = {CascadeType.ALL})
+    @JoinTable(
+            name = "goal_stat",
+            joinColumns = { @JoinColumn(name = "stat_id")},
+            inverseJoinColumns = { @JoinColumn(name = "goal_id")}
+    )
+    @Getter
+    private List<Goal> goalList = new ArrayList<>();
 
     /*@ManyToOne
     @JoinColumn(name = "user_id")
