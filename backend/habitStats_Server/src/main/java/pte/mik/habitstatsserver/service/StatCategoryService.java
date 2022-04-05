@@ -35,13 +35,7 @@ public class StatCategoryService {
         }
     }
 
-    public String deleteCategory(StatCategory statCategory) {
-        return tryFunction(() -> categoryRepository.deleteById(statCategory.getId()));
-        /*try {
-            categoryRepository.delete(statCategory);
-        } catch (Exception e) {
-            return "Error: " + e.getMessage();
-        }
-        return "Done!";*/
+    public String deleteCategory(Integer id) {
+        return tryFunction(() -> categoryRepository.deleteById(id));
     }
 }

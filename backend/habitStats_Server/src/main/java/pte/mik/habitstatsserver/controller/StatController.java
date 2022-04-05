@@ -33,8 +33,8 @@ public class StatController {
         return statService.editStat(stat);
     }
 
-    @DeleteMapping
-    public String deleteStat(@RequestBody ActionStatDto stat) {
-        return statService.deleteStat(stat);
+    @DeleteMapping("/{id}")
+    public String deleteStat(@PathVariable Integer id) {
+        return statService.deleteStat(id);
     }
 }

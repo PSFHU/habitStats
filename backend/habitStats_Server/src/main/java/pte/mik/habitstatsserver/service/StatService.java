@@ -56,8 +56,8 @@ public class StatService {
         return tryFunction(() -> statRepository.save(newStat));
     }
 
-    public String deleteStat(ActionStatDto stat) {
-        return tryFunction(() -> statRepository.deleteById(stat.getId()));
+    public String deleteStat(Integer id) {
+        return tryFunction(() -> statRepository.deleteById(id));
     }
 
 

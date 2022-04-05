@@ -26,5 +26,5 @@ public class UnitTypeService {
 
     public String create(UnitType unitType){ return tryFunction(() -> unitTypeRepository.save(unitType));}
 
-    public String delete(UnitType unitType){ return tryFunction(() -> unitTypeRepository.deleteById(unitType.getId()));}
+    public String delete(Integer id){ return tryFunction(() -> unitTypeRepository.deleteById(id));}
 }

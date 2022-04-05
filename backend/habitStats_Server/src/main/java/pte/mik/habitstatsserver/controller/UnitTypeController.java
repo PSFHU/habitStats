@@ -23,6 +23,6 @@ public class UnitTypeController {
     @PostMapping
     public String create(UnitType unitType){return unitTypeService.create(unitType);}
 
-    @DeleteMapping
-    public String delete(UnitType unitType){return unitTypeService.delete(unitType);}
+    @DeleteMapping("/{id}")
+    public String delete(@PathVariable("id") Integer id){return unitTypeService.delete(id);}
 }

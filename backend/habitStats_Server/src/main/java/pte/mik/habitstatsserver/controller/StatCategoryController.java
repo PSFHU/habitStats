@@ -27,8 +27,8 @@ public class StatCategoryController {
         return statCategoryService.createCategory(category);
     }
 
-    @DeleteMapping
-    public String deleteCategory(@RequestBody StatCategory category) {
-        return statCategoryService.deleteCategory(category);
+    @DeleteMapping("/{id}")
+    public String deleteCategory(@PathVariable("id") Integer id) {
+        return statCategoryService.deleteCategory(id);
     }
 }
