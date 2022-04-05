@@ -32,7 +32,7 @@ public class StatService {
     public StatService() {
         final TypeMap<ActionStatDto, Stat> propertyMapper = mapper.createTypeMap(ActionStatDto.class, Stat.class);
         final Converter<Integer, StatCategory> idToCategory = id -> statCategoryService.getCategoryById(id.getSource());
-        final Converter<Integer, UnitType> idToUnitType = id -> unitTypeService.getUnitTypeById(id.getSource());
+        final Converter<Integer, UnitType> idToUnitType = id -> unitTypeService.getById(id.getSource());
 
         propertyMapper.addMappings(
                 mapper -> mapper.using(idToCategory).map(ActionStatDto::getCategoryId,Stat::setCategory)
