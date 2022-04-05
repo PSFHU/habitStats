@@ -1,20 +1,21 @@
-package pte.mik.habitstatsserver.entity;
+package pte.mik.habitstatsserver.entity.stat;
+
+import javax.persistence.*;
 
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.*;
-
 @Entity
-@Table(name = "unit_type")
-public class UnitType {
+@Table(name = "stat_category")
+public class StatCategory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter
     @Setter
     private Integer id;
-    @Column(name = "unit_type_name")
+    @Column(name = "stat_category_name")
     @Getter
     @Setter
     private String name;
+
 }

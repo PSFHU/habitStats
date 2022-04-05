@@ -1,10 +1,10 @@
-package pte.mik.habitstatsserver.controller;
+package pte.mik.habitstatsserver.controller.stat;
 
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import pte.mik.habitstatsserver.entity.Progress;
-import pte.mik.habitstatsserver.service.ProgressService;
+import pte.mik.habitstatsserver.entity.stat.Progress;
+import pte.mik.habitstatsserver.service.stat.ProgressService;
 
 import java.util.List;
 
@@ -29,6 +29,7 @@ public class ProgressController {
     @GetMapping("/stat/{id}")
     public List<Progress> getByStatId(@PathVariable("id") Integer statId){return progressService.getByStatId(statId);}
 
+    // TODO Creating DTO to Create Progress
     @PostMapping
     public String create(@RequestBody Progress progress){
         return progressService.create(progress);

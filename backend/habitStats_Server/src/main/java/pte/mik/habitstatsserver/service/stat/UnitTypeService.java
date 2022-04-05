@@ -1,10 +1,10 @@
-package pte.mik.habitstatsserver.service;
+package pte.mik.habitstatsserver.service.stat;
 
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pte.mik.habitstatsserver.entity.UnitType;
-import pte.mik.habitstatsserver.repository.UnitTypeRepository;
+import pte.mik.habitstatsserver.entity.stat.UnitType;
+import pte.mik.habitstatsserver.repository.stat.UnitTypeRepository;
 
 import java.util.List;
 

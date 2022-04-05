@@ -1,4 +1,4 @@
-package pte.mik.habitstatsserver.service;
+package pte.mik.habitstatsserver.service.stat;
 
 import java.util.List;
 
@@ -10,10 +10,10 @@ import org.springframework.stereotype.Service;
 
 import lombok.AllArgsConstructor;
 import pte.mik.habitstatsserver.dto.ActionStatDto;
-import pte.mik.habitstatsserver.entity.Stat;
-import pte.mik.habitstatsserver.entity.StatCategory;
-import pte.mik.habitstatsserver.entity.UnitType;
-import pte.mik.habitstatsserver.repository.StatRepository;
+import pte.mik.habitstatsserver.entity.stat.Stat;
+import pte.mik.habitstatsserver.entity.stat.StatCategory;
+import pte.mik.habitstatsserver.entity.stat.UnitType;
+import pte.mik.habitstatsserver.repository.stat.StatRepository;
 
 import static pte.mik.habitstatsserver.service.TryCatchService.tryFunction;
 

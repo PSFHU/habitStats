@@ -1,11 +1,11 @@
-package pte.mik.habitstatsserver.service;
+package pte.mik.habitstatsserver.service.stat;
 
 import lombok.AllArgsConstructor;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pte.mik.habitstatsserver.entity.StatCategory;
-import pte.mik.habitstatsserver.repository.StatCategoryRepository;
+import pte.mik.habitstatsserver.entity.stat.StatCategory;
+import pte.mik.habitstatsserver.repository.stat.StatCategoryRepository;
 
 import java.util.List;
 

@@ -1,9 +1,9 @@
-package pte.mik.habitstatsserver.service;
+package pte.mik.habitstatsserver.service.stat;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pte.mik.habitstatsserver.entity.Goal;
-import pte.mik.habitstatsserver.repository.GoalRepository;
+import pte.mik.habitstatsserver.entity.stat.Goal;
+import pte.mik.habitstatsserver.repository.stat.GoalRepository;
 
 import java.util.List;
 

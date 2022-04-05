@@ -1,11 +1,10 @@
-package pte.mik.habitstatsserver.service;
+package pte.mik.habitstatsserver.service.stat;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pte.mik.habitstatsserver.entity.Progress;
-import pte.mik.habitstatsserver.entity.StatCategory;
-import pte.mik.habitstatsserver.repository.ProgressRepository;
-import pte.mik.habitstatsserver.repository.StatRepository;
+import pte.mik.habitstatsserver.entity.stat.Progress;
+import pte.mik.habitstatsserver.repository.stat.ProgressRepository;
+import pte.mik.habitstatsserver.repository.stat.StatRepository;
 
 import java.util.List;
 

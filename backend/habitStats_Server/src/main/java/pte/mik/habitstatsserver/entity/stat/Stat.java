@@ -1,9 +1,7 @@
-package pte.mik.habitstatsserver.entity;
+package pte.mik.habitstatsserver.entity.stat;
 
 import javax.persistence.*;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;

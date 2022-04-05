@@ -1,9 +1,9 @@
-package pte.mik.habitstatsserver.controller;
+package pte.mik.habitstatsserver.controller.stat;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import pte.mik.habitstatsserver.entity.UnitType;
-import pte.mik.habitstatsserver.service.UnitTypeService;
+import pte.mik.habitstatsserver.entity.stat.UnitType;
+import pte.mik.habitstatsserver.service.stat.UnitTypeService;
 
 import java.util.List;
 
