@@ -27,6 +27,7 @@ public class StatCategoryService {
         return categoryRepository.findById(id).get();
     }
 
+    // TODO Introduce DTO
     public String createCategory(StatCategory statCategory) {
         if (!categoryRepository.existsById(statCategory.getId())) {
             return tryFunction(() -> categoryRepository.save(statCategory));

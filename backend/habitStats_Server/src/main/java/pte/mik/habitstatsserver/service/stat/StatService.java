@@ -88,7 +88,7 @@ public class StatService {
     public String deleteGoal(MapperGoalDto mapperGoalDto){
         Stat selectedStat = statRepository.getById(mapperGoalDto.getStatId());
         if(selectedStat != null){
-            if (selectedStat.getGoalList().stream().filter(goal -> goal.getId().equals(mapperGoalDto.getGoalId())).findFirst().isPresent())
+            if (selectedStat.getGoalList().stream().anyMatch(goal -> goal.getId().equals(mapperGoalDto.getGoalId())))
                 selectedStat.getGoalList().remove(goalRepository.getById(mapperGoalDto.getGoalId()));
             else
                 return "Goal already removed!";
