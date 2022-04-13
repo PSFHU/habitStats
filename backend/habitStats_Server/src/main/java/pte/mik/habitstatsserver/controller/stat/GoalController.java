@@ -2,6 +2,7 @@ package pte.mik.habitstatsserver.controller.stat;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import pte.mik.habitstatsserver.dto.CreateGoalDto;
 import pte.mik.habitstatsserver.entity.stat.Goal;
 import pte.mik.habitstatsserver.service.stat.GoalService;
 
@@ -20,7 +21,7 @@ public class GoalController {
     }
 
     @PostMapping
-    public String create(@RequestBody Goal goal){
+    public String create(@RequestBody CreateGoalDto goal){
         return goalService.create(goal);
     }
     @PutMapping

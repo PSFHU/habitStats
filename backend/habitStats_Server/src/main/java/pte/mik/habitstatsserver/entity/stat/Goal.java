@@ -13,6 +13,7 @@ import java.util.List;
 public class Goal {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter
     @Setter
     private Integer id;
@@ -34,5 +35,7 @@ public class Goal {
 
     @JsonBackReference
     @ManyToMany(mappedBy = "goalList")
-    private List<Stat> statList = new ArrayList<>();
+    @Getter
+    @Setter
+    private List<Stat> statList;
 }

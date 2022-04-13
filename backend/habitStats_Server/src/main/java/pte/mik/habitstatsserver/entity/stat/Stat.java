@@ -35,7 +35,8 @@ public class Stat {
             inverseJoinColumns = { @JoinColumn(name = "goal_id")}
     )
     @Getter
-    private List<Goal> goalList = new ArrayList<>();
+    @Setter
+    private List<Goal> goalList;
 
     /*@ManyToOne
     @JoinColumn(name = "user_id")
