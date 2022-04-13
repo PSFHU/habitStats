@@ -6,6 +6,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.time.Instant;
 
 @Entity
 @Table(name = "progress")
@@ -15,7 +16,6 @@ public class Progress {
     @Getter
     @Setter
     private Integer id;
-
     @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "stat_id")
@@ -29,5 +29,5 @@ public class Progress {
     @Column(name = "progress_timestamp")
     @Getter
     @Setter
-    private Timestamp timestamp;
+    private Instant timestamp;
 }
