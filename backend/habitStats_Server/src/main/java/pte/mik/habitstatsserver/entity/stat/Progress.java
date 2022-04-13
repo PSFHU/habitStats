@@ -11,6 +11,7 @@ import java.sql.Timestamp;
 @Table(name = "progress")
 public class Progress {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter
     @Setter
     private Integer id;

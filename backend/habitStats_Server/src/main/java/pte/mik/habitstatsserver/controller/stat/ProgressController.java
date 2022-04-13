@@ -3,6 +3,7 @@ package pte.mik.habitstatsserver.controller.stat;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import pte.mik.habitstatsserver.entity.stat.ActionProgressDto;
 import pte.mik.habitstatsserver.entity.stat.Progress;
 import pte.mik.habitstatsserver.service.stat.ProgressService;
 
@@ -21,22 +22,17 @@ public class ProgressController {
         return progressService.listAll();
     }
 
-    @GetMapping("/{id}")
-    public Progress getById(@PathVariable("id") Integer id){
-        return progressService.getById(id);
-    }
 
     @GetMapping("/stat/{id}")
     public List<Progress> getByStatId(@PathVariable("id") Integer statId){return progressService.getByStatId(statId);}
-
-    // TODO Creating DTO to Create Progress
+    
     @PostMapping
-    public String create(@RequestBody Progress progress){
+    public String create(@RequestBody ActionProgressDto progress){
         return progressService.create(progress);
     }
 
     @PutMapping
-    public String edit(@RequestBody Progress progress){
+    public String edit(@RequestBody ActionProgressDto progress){
         return progressService.edit(progress);
     }
 

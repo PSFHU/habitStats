@@ -1,12 +1,17 @@
 package pte.mik.habitstatsserver.service.stat;
 
+import org.modelmapper.Converter;
+import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pte.mik.habitstatsserver.entity.stat.Progress;
+import pte.mik.habitstatsserver.dto.ActionStatDto;
+import pte.mik.habitstatsserver.entity.stat.*;
 import pte.mik.habitstatsserver.repository.stat.ProgressRepository;
 import pte.mik.habitstatsserver.repository.stat.StatRepository;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static pte.mik.habitstatsserver.service.TryCatchService.tryFunction;
 
@@ -18,24 +23,33 @@ public class ProgressService {
     @Autowired
     StatRepository statRepository;
 
+    private final ModelMapper mapper = new ModelMapper();
+
+    public ProgressService() {
+        final Converter<Integer, Stat> idToStat = id -> statRepository.getById(id.getSource());
+
+        final TypeMap<ActionProgressDto, Progress> actionStatDtoStatTypeMap = mapper.createTypeMap(ActionProgressDto.class, Progress.class);
+
+        actionStatDtoStatTypeMap.addMappings(
+                mapper -> mapper.using(idToStat).map(ActionProgressDto::getStatId,Progress::setStat)
+        );
+    }
+
     public List<Progress> listAll(){
         return progressRepository.findAll();
     }
 
     public List<Progress> getByStatId(Integer statId) { return progressRepository.getByStatId(statId);}
 
-    public Progress getById(Integer id){
-        return progressRepository.findById(id).get();
+    public String create(ActionProgressDto progress) {
+        Progress newProgress = this.mapper.map(progress,Progress.class);
+        return  tryFunction(()->progressRepository.save(newProgress));
     }
 
-    public String create(Progress progress) {
-        progress.setStat(statRepository.getById(progress.getStat().getId()));
-        return  tryFunction(()->progressRepository.save(progress));
-    }
-
-    public String edit(Progress progress) {
+    public String edit(ActionProgressDto progress) {
         if (progressRepository.existsById(progress.getId())){
-            return tryFunction(()->progressRepository.save(progress));
+            Progress newProgress = this.mapper.map(progress,Progress.class);
+            return tryFunction(()->progressRepository.save(newProgress));
         }
         else
             return "Progress doesn't exists";
