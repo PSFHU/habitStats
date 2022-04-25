@@ -29,11 +29,7 @@ public class StatCategoryService {
 
     // TODO Introduce DTO
     public String createCategory(StatCategory statCategory) {
-        if (!categoryRepository.existsById(statCategory.getId())) {
-            return tryFunction(() -> categoryRepository.save(statCategory));
-        } else {
-            return "Already made!";
-        }
+        return tryFunction(() -> categoryRepository.save(statCategory));
     }
 
     public String deleteCategory(Integer id) {

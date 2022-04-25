@@ -75,6 +75,7 @@ public class StatControllerTest {
     @Test
     @Transactional
     public void addGoal() {
+        removeGoal();
         MapperGoalDto mapperGoalDto = new MapperGoalDto(latestStat().getId(),latestGoal().getId());
         assertThat(controller.addGoal(mapperGoalDto)).isEqualTo("Done!");
         assertThat(controller.addGoal(mapperGoalDto)).isEqualTo("Goal already added!");

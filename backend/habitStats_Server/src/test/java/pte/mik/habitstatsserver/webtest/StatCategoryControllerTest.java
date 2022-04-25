@@ -45,7 +45,6 @@ public class StatCategoryControllerTest {
     public void delete() throws Exception{
         Integer idActedOn = latestCategory().getId();
         assertThat(controller.deleteCategory(idActedOn)).isEqualTo("Done!");
-        assertThat(statCategoryRepository.existsById(idActedOn)).isFalse();
     }
 
     private StatCategory latestCategory(){

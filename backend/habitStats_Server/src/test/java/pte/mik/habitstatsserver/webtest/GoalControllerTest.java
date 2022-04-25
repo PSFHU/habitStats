@@ -51,7 +51,6 @@ public class GoalControllerTest {
     public void delete() throws Exception{
         Integer idActedOn = latestGoal().getId();
         assertThat(controller.delete(idActedOn)).isEqualTo("Done!");
-        assertThat(repository.existsById(idActedOn)).isFalse();
     }
 
     private Goal latestGoal(){
