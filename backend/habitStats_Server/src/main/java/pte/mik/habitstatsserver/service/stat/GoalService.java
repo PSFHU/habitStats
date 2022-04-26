@@ -19,13 +19,11 @@ import static pte.mik.habitstatsserver.service.TryCatchService.tryFunction;
 @AllArgsConstructor
 public class GoalService {
 
-    @Autowired
     private GoalRepository goalRepository;
-    @Autowired
     private StatService statService;
     private final ModelMapper mapper = new ModelMapper();
 
-    public GoalService() {
+    public GoalService(@Autowired GoalRepository goalRepository, @Autowired StatService statService) {
         final TypeMap<CreateGoalDto, Goal> propertyMapper = mapper.createTypeMap(CreateGoalDto.class, Goal.class);
         final Converter<List<Integer>, List<Stat>> idToStat = id -> id.getSource()
                 .stream()
