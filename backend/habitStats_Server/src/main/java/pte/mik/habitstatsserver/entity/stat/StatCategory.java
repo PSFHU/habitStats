@@ -2,20 +2,23 @@ package pte.mik.habitstatsserver.entity.stat;
 
 import javax.persistence.*;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
+@Data
+@EqualsAndHashCode(callSuper = true)
+@ToString(callSuper = false)
+@NoArgsConstructor
 @Entity
-@Table(name = "stat_category")
-public class StatCategory {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Getter
-    @Setter
-    private Integer id;
-    @Column(name = "stat_category_name")
-    @Getter
-    @Setter
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@SuperBuilder
+@Table(name = StatCategory.TBL_NAME)
+public class StatCategory extends AbstractEntity<Long>{
+
+    public static final String TBL_NAME="stat_category";
+    public static final String FLD_CATEGORY_NAME="stat_category_name";
+
+    @Column(name = FLD_CATEGORY_NAME)
     private String name;
 
 }

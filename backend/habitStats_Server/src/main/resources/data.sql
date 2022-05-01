@@ -1,45 +1,120 @@
--- USERS
-Insert INTO USER(USERNAME, PASSWORD)
-VALUES ('kispista','teszt');
-
--- UNIT TYPES
-INSERT INTO UNIT_TYPE(UNIT_TYPE_NAME)
-VALUES ('db');
-
-INSERT INTO UNIT_TYPE(UNIT_TYPE_NAME)
-VALUES ('km');
-
--- CATEGORIES
-INSERT INTO STAT_CATEGORY(STAT_CATEGORY_NAME)
-VALUES ('Edzés');
-
--- STATS
-INSERT INTO STAT(STAT_NAME, UNIT_TYPE_ID, STAT_CATEGORY_ID, USER_ID)
-VALUES ('Felülés',
-        (SELECT ID FROM UNIT_TYPE WHERE UNIT_TYPE_NAME = 'db'),
-        (SELECT ID FROM STAT_CATEGORY WHERE STAT_CATEGORY_NAME = 'Edzés'),
-        (SELECT ID FROM USER WHERE USERNAME = 'kispista'));
-
--- PROGRESS
-INSERT INTO PROGRESS(STAT_ID, PROGRESS_VALUE)
-VALUES ((SELECT ID FROM STAT WHERE STAT_NAME = 'Felülés' AND USER_ID = (SELECT ID FROM USER WHERE USERNAME = 'kispista')),
-        10);
-
-INSERT INTO PROGRESS(STAT_ID, PROGRESS_VALUE)
-VALUES ((SELECT ID FROM STAT WHERE STAT_NAME = 'Felülés' AND USER_ID = (SELECT ID FROM USER WHERE USERNAME = 'kispista')),
-        15);
-
-INSERT INTO PROGRESS(STAT_ID, PROGRESS_VALUE)
-VALUES ((SELECT ID FROM STAT WHERE STAT_NAME = 'Felülés' AND USER_ID = (SELECT ID FROM USER WHERE USERNAME = 'kispista')),
-        16);
-
-INSERT INTO PROGRESS(STAT_ID, PROGRESS_VALUE)
-VALUES ((SELECT ID FROM STAT WHERE STAT_NAME = 'Felülés' AND USER_ID = (SELECT ID FROM USER WHERE USERNAME = 'kispista')),
-        10);
-
---GOALS
-INSERT INTO GOAL(TITLE, GOAL_VALUE, GOAL_LOGIC)
-VALUES ('Csinálj 30 felülést',30,'=>');
-
-INSERT INTO GOAL_STAT(GOAL_ID, STAT_ID)
-VALUES ((SELECT ID FROM GOAL WHERE TITLE = 'Csinálj 30 felülést'),(SELECT ID FROM STAT WHERE STAT_NAME = 'Felülés' AND USER_ID = (SELECT ID FROM USER WHERE USERNAME = 'kispista')));
+insert into users (username, password)
+values (
+           'kispista',
+           'teszt'
+       );
+insert into unit_type (unit_type_name)
+values ('db');
+insert into unit_type (unit_type_name)
+values ('km');
+insert into stat_category (stat_category_name)
+values ('Edzés');
+insert into stat (stat_name, unit_type_id, stat_category_id, user_id)
+values (
+           'Felülés',
+           (
+               select id
+               from unit_type
+               where unit_type_name = 'db'
+           ),
+           (
+               select id
+               from stat_category
+               where stat_category_name = 'Edzés'
+           ),
+           (
+               select id
+               from users
+               where username = 'kispista'
+           )
+       );
+insert into progress (stat_id, progress_value)
+values (
+           (
+               select id
+               from stat
+               where (
+                                 stat_name = 'Felülés'
+                             and user_id = (
+                             select id
+                             from users
+                             where username = 'kispista'
+                         )
+                         )
+           ),
+           10
+       );
+insert into progress (stat_id, progress_value)
+values (
+           (
+               select id
+               from stat
+               where (
+                                 stat_name = 'Felülés'
+                             and user_id = (
+                             select id
+                             from users
+                             where username = 'kispista'
+                         )
+                         )
+           ),
+           15
+       );
+insert into progress (stat_id, progress_value)
+values (
+           (
+               select id
+               from stat
+               where (
+                                 stat_name = 'Felülés'
+                             and user_id = (
+                             select id
+                             from users
+                             where username = 'kispista'
+                         )
+                         )
+           ),
+           16
+       );
+insert into progress (stat_id, progress_value)
+values (
+           (
+               select id
+               from stat
+               where (
+                                 stat_name = 'Felülés'
+                             and user_id = (
+                             select id
+                             from users
+                             where username = 'kispista'
+                         )
+                         )
+           ),
+           10
+       );
+insert into goal (title, goal_value, goal_logic)
+values (
+           'Csinálj 30 felülést',
+           30,
+           '=>'
+       );
+insert into goal_stat (goal_id, stat_id)
+values (
+           (
+               select id
+               from goal
+               where title = 'Csinálj 30 felülést'
+           ),
+           (
+               select id
+               from stat
+               where (
+                                 stat_name = 'Felülés'
+                             and user_id = (
+                             select id
+                             from users
+                             where username = 'kispista'
+                         )
+                         )
+           )
+       );

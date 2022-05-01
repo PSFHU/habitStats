@@ -5,5 +5,5 @@ import org.springframework.stereotype.Repository;
 import pte.mik.habitstatsserver.entity.stat.Goal;
 
 @Repository
-public interface GoalRepository extends JpaRepository<Goal,Integer> {
+public interface GoalRepository extends JpaRepository<Goal,Long> {
 }

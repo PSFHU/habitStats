@@ -1,41 +1,38 @@
 package pte.mik.habitstatsserver.entity.stat;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
+@Data
+@EqualsAndHashCode(callSuper = true)
+@ToString(callSuper = false)
+@NoArgsConstructor
 @Entity
-@Table(name = "goal")
-public class Goal {
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@SuperBuilder
+@Table(name = Goal.TBL_NAME)
+public class Goal extends AbstractEntity<Long>{
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Getter
-    @Setter
-    private Integer id;
-    @Getter
-    @Setter
+    public static final String TBL_NAME="goal";
+    public static final String FLD_TITLE="title";
+    public static final String FLD_VALUE="goal_value";
+    public static final String FLD_LOGIC="goal_logic";
+    public static final String FLD_COMPLETED="goal";
+
+    @Column(name = FLD_TITLE)
     private String title;
-    @Column(name = "goal_value")
-    @Getter
-    @Setter
+    @Column(name = FLD_VALUE)
     private Float value;
-    @Column(name = "goal_logic")
-    @Getter
-    @Setter
+    @Column(name = FLD_LOGIC)
     private String logic;
-    @Column(name = "goal_completed")
-    @Getter
-    @Setter
+    @Column(name = FLD_COMPLETED)
     private Boolean completed;
 
     @JsonBackReference
     @ManyToMany(mappedBy = "goalList")
-    @Getter
-    @Setter
     private List<Stat> statList;
 }

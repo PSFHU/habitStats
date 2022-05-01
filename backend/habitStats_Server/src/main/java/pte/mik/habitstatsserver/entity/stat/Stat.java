@@ -3,39 +3,40 @@ package pte.mik.habitstatsserver.entity.stat;
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Data
+@EqualsAndHashCode(callSuper = true)
+@ToString(callSuper = false)
+@NoArgsConstructor
 @Entity
-@Table(name = "stat")
-public class Stat {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Setter
-    @Getter
-    private Integer id;
-    @Column(name = "stat_name")
-    @Getter
-    @Setter
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@SuperBuilder
+@Table(name = Stat.TBL_NAME)
+public class Stat extends AbstractEntity<Long>{
+
+    public static final String TBL_NAME="stat";
+    public static final String FLD_TITLE="stat_name";
+    public static final String CON_GOAL_LIST="goal_stat";
+
+    @Column(name = FLD_TITLE)
     private String title;
 
     @JsonManagedReference
     @OneToMany(mappedBy = "stat", fetch = FetchType.LAZY)
-    @Getter
     private List<Progress> progressList;
 
     @JsonManagedReference
     @ManyToMany(cascade = {CascadeType.ALL})
     @JoinTable(
-            name = "goal_stat",
-            joinColumns = { @JoinColumn(name = "stat_id")},
-            inverseJoinColumns = { @JoinColumn(name = "goal_id")}
+            name = CON_GOAL_LIST,
+            joinColumns = { @JoinColumn(name = Stat.FLD_ID)},
+            inverseJoinColumns = { @JoinColumn(name = Goal.FLD_ID)}
     )
-    @Getter
-    @Setter
     private List<Goal> goalList;
 
     /*@ManyToOne
@@ -43,14 +44,12 @@ public class Stat {
     @Getter
     @Setter
     private User user;*/
+
     @ManyToOne
-    @JoinColumn(name = "stat_category_id")
-    @Getter
-    @Setter
+    @JoinColumn(name = StatCategory.FLD_ID)
     private StatCategory category;
+
     @ManyToOne
-    @JoinColumn(name = "unit_type_id")
-    @Getter
-    @Setter
+    @JoinColumn(name = UnitType.FLD_ID)
     private UnitType unit_type;
 }

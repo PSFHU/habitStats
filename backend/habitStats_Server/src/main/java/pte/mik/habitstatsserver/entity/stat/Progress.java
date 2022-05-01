@@ -1,33 +1,38 @@
 package pte.mik.habitstatsserver.entity.stat;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
 import java.time.Instant;
 
+@Data
+@EqualsAndHashCode(callSuper = true)
+@ToString(callSuper = false)
+@NoArgsConstructor
 @Entity
-@Table(name = "progress")
-public class Progress {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Getter
-    @Setter
-    private Integer id;
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@SuperBuilder
+@Table(name = Progress.TBL_NAME)
+public class Progress extends AbstractEntity<Long>{
+
+    public static final String TBL_NAME ="progress";
+    public static final String FLD_STAT_ID="stat_id";
+    public static final String FLD_PROG_VALUE="progress_value";
+    public static final String FLD_PROG_TIMESTAMP="progress_timestamp";
+
     @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "stat_id")
-    @Getter
-    @Setter
+    @JoinColumn(name = FLD_STAT_ID)
     private Stat stat;
-    @Column(name = "progress_value")
-    @Getter
-    @Setter
+
+    @Column(name = FLD_PROG_VALUE)
     private Float value;
-    @Column(name = "progress_timestamp")
-    @Getter
-    @Setter
+
+    @Column(name = FLD_PROG_TIMESTAMP)
     private Instant timestamp;
 }

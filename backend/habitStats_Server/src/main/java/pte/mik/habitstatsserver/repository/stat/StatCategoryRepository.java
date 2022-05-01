@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 import pte.mik.habitstatsserver.entity.stat.StatCategory;
 
 @Repository
-public interface StatCategoryRepository extends JpaRepository<StatCategory, Integer> {
+public interface StatCategoryRepository extends JpaRepository<StatCategory, Long> {
 }
