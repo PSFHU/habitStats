@@ -16,7 +16,6 @@ import java.util.stream.Collectors;
 import static pte.mik.habitstatsserver.service.TryCatchService.tryFunction;
 
 @Service
-@AllArgsConstructor
 public class GoalService {
 
     private GoalRepository goalRepository;
@@ -25,10 +24,12 @@ public class GoalService {
 
     public GoalService(@Autowired GoalRepository goalRepository, @Autowired StatService statService) {
         final TypeMap<CreateGoalDto, Goal> propertyMapper = mapper.createTypeMap(CreateGoalDto.class, Goal.class);
-        final Converter<List<Integer>, List<Stat>> idToStat = id -> id.getSource()
-                .stream()
-                .map(element -> statService.getStatById(element.intValue()))
-                .collect(Collectors.toList());
+        final Converter<List<Long>, List<Stat>> idToStat = id -> {
+            return id.getSource()
+                    .stream()
+                    .map(statService::getStatById)
+                    .collect(Collectors.toList());
+        };
 
         propertyMapper.addMappings(
                 mapper -> mapper.using(idToStat).map(CreateGoalDto::getStatListIds,Goal::setStatList)
@@ -39,7 +40,7 @@ public class GoalService {
         return goalRepository.findAll();
     }
 
-    public Goal getById(Integer id){return goalRepository.getById(id);}
+    public Goal getById(Long id){return goalRepository.getById(id);}
 
     // TODO Check progress on Stat
 
@@ -57,5 +58,5 @@ public class GoalService {
         return tryFunction(()->goalRepository.save(selectedGoal));
     }
 
-    public String delete(Integer id){return tryFunction(()->goalRepository.deleteById(id));}
+    public String delete(Long id){return tryFunction(()->goalRepository.deleteById(id));}
 }

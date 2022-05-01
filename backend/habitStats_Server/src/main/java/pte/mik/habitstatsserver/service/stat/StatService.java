@@ -22,24 +22,19 @@ import pte.mik.habitstatsserver.repository.stat.StatRepository;
 import static pte.mik.habitstatsserver.service.TryCatchService.tryFunction;
 
 @Service
-@AllArgsConstructor
 public class StatService {
 
-    @Autowired
     private StatRepository statRepository;
-    @Autowired
     private GoalRepository goalRepository;
-    @Autowired
     private StatCategoryService statCategoryService;
-    @Autowired
     private UnitTypeService unitTypeService;
 
     private final ModelMapper mapper = new ModelMapper();
 
     public StatService() {
-        final Converter<Integer, StatCategory> idToCategory = id -> statCategoryService.getCategoryById(id.getSource());
-        final Converter<Integer, UnitType> idToUnitType = id -> unitTypeService.getById(id.getSource());
-        final Converter<List<Goal>, List<Integer>> goalsToIds = goals -> goals.getSource()
+        final Converter<Long, StatCategory> idToCategory = id -> statCategoryService.getCategoryById(id.getSource());
+        final Converter<Long, UnitType> idToUnitType = id -> unitTypeService.getById(id.getSource());
+        final Converter<List<Goal>, List<Long>> goalsToIds = goals -> goals.getSource()
                 .stream()
                 .map(Goal::getId)
                 .collect(Collectors.toList());
@@ -54,11 +49,19 @@ public class StatService {
         );
     }
 
+    @Autowired
+    public StatService(StatRepository statRepository, GoalRepository goalRepository, StatCategoryService statCategoryService, UnitTypeService unitTypeService) {
+        this.statRepository = statRepository;
+        this.goalRepository = goalRepository;
+        this.statCategoryService = statCategoryService;
+        this.unitTypeService = unitTypeService;
+    }
+
     public List<Stat> listAllStat() {
         return statRepository.findAll();
     }
 
-    public Stat getStatById(Integer id){ return statRepository.findById(id).get();}
+    public Stat getStatById(Long id){ return statRepository.findById(id).get();}
 
     public String addStat(ActionStatDto stat) {
         Stat newStat = this.mapper.map(stat,Stat.class);
@@ -75,7 +78,7 @@ public class StatService {
         Stat selectedStat = statRepository.getById(mapperGoalDto.getStatId());
         if(selectedStat != null){
             //TODO Check action happened or not
-            if (selectedStat.getGoalList().stream().filter(goal -> goal.getId().equals(mapperGoalDto.getGoalId())).findFirst().isPresent())
+            if (selectedStat.getGoalList().stream().anyMatch(goal -> goal.getId().equals(mapperGoalDto.getGoalId())))
                 return "Goal already added!";
             else
                 selectedStat.getGoalList().add(goalRepository.getById(mapperGoalDto.getGoalId()));
@@ -97,7 +100,7 @@ public class StatService {
             return "Stat doesn't exists!";
     }
 
-    public String deleteStat(Integer id) {
+    public String deleteStat(Long id) {
         return tryFunction(() -> statRepository.deleteById(id));
     }
 

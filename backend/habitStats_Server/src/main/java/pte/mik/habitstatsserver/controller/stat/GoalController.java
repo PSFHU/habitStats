@@ -12,8 +12,11 @@ import java.util.List;
 @RequestMapping("/api/goal")
 public class GoalController {
 
-    @Autowired
-    private GoalService goalService;
+    private final GoalService goalService;
+
+    public GoalController(@Autowired GoalService goalService) {
+        this.goalService = goalService;
+    }
 
     @GetMapping
     public List<Goal> listAll(){
@@ -29,7 +32,7 @@ public class GoalController {
         return goalService.edit(goal);
     }
     @DeleteMapping("/{id}")
-    public String delete(@PathVariable("id") Integer id){
+    public String delete(@PathVariable("id") Long id){
         return goalService.delete(id);
     }
 }

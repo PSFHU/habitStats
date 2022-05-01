@@ -10,12 +10,14 @@ import pte.mik.habitstatsserver.service.stat.StatCategoryService;
 import java.util.List;
 
 @RestController
-@AllArgsConstructor
 @RequestMapping("/api/category")
 public class StatCategoryController {
 
-    @Autowired
-    private StatCategoryService statCategoryService;
+    private final StatCategoryService statCategoryService;
+
+    public StatCategoryController(@Autowired StatCategoryService statCategoryService) {
+        this.statCategoryService = statCategoryService;
+    }
 
     @GetMapping
     public List<StatCategory> listAllCategory() {
@@ -28,7 +30,7 @@ public class StatCategoryController {
     }
 
     @DeleteMapping("/{id}")
-    public String deleteCategory(@PathVariable("id") Integer id) {
+    public String deleteCategory(@PathVariable("id") Long id) {
         return statCategoryService.deleteCategory(id);
     }
 }

@@ -18,28 +18,28 @@ import static pte.mik.habitstatsserver.service.TryCatchService.tryFunction;
 @Service
 public class ProgressService {
 
-    @Autowired
     ProgressRepository progressRepository;
-    @Autowired
     StatRepository statRepository;
 
     private final ModelMapper mapper = new ModelMapper();
 
-    public ProgressService() {
-        final Converter<Integer, Stat> idToStat = id -> statRepository.getById(id.getSource());
+    public ProgressService(ProgressRepository progressRepository, StatRepository statRepository) {
+        final Converter<Long, Stat> idToStat = id -> statRepository.getById(id.getSource());
 
         final TypeMap<ActionProgressDto, Progress> actionStatDtoStatTypeMap = mapper.createTypeMap(ActionProgressDto.class, Progress.class);
 
         actionStatDtoStatTypeMap.addMappings(
                 mapper -> mapper.using(idToStat).map(ActionProgressDto::getStatId,Progress::setStat)
         );
+        this.progressRepository = progressRepository;
+        this.statRepository = statRepository;
     }
 
     public List<Progress> listAll(){
         return progressRepository.findAll();
     }
 
-    public List<Progress> getByStatId(Integer statId) { return progressRepository.getByStatId(statId);}
+    public List<Progress> getByStatId(Long statId) { return progressRepository.getByStatId(statId);}
 
     public String create(ActionProgressDto progress) {
         Progress newProgress = this.mapper.map(progress,Progress.class);
@@ -55,7 +55,7 @@ public class ProgressService {
             return "Progress doesn't exists";
     }
 
-    public String deleteById(Integer id){
+    public String deleteById(Long id){
         return tryFunction(()->progressRepository.deleteById(id));
     }
 

@@ -14,11 +14,13 @@ import pte.mik.habitstatsserver.service.stat.StatService;
 
 @RestController
 @RequestMapping("/api/stat")
-@AllArgsConstructor
 public class StatController {
 
-    @Autowired
-    private StatService statService;
+    private final StatService statService;
+
+    public StatController(@Autowired StatService statService) {
+        this.statService = statService;
+    }
 
     @GetMapping
     public List<Stat> listAllStat() {
@@ -26,7 +28,7 @@ public class StatController {
     }
 
     @GetMapping("/{id}")
-    public Stat getByStatId(@PathVariable("id") Integer id){ return statService.getStatById(id);}
+    public Stat getByStatId(@PathVariable("id") Long id){ return statService.getStatById(id);}
 
     @PostMapping
     public String addStat(@RequestBody ActionStatDto stat) {
@@ -39,7 +41,7 @@ public class StatController {
     }
 
     @DeleteMapping("/{id}")
-    public String deleteStat(@PathVariable Integer id) {
+    public String deleteStat(@PathVariable Long id) {
         return statService.deleteStat(id);
     }
 

@@ -11,19 +11,21 @@ import java.util.List;
 import static pte.mik.habitstatsserver.service.TryCatchService.tryFunction;
 
 @Service
-@AllArgsConstructor
 public class UnitTypeService {
 
-    @Autowired
-    private UnitTypeRepository unitTypeRepository;
+    private final UnitTypeRepository unitTypeRepository;
+
+    public UnitTypeService(@Autowired UnitTypeRepository unitTypeRepository) {
+        this.unitTypeRepository = unitTypeRepository;
+    }
 
     public List<UnitType> listAll(){return unitTypeRepository.findAll();}
 
-    public UnitType getById(Integer id){
+    public UnitType getById(Long id){
         return unitTypeRepository.findById(id).get();
     }
 
     public String create(UnitType unitType){ return tryFunction(() -> unitTypeRepository.save(unitType));}
 
-    public String delete(Integer id){ return tryFunction(() -> unitTypeRepository.deleteById(id));}
+    public String delete(Long id){ return tryFunction(() -> unitTypeRepository.deleteById(id));}
 }

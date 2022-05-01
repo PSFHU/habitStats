@@ -13,17 +13,19 @@ import static pte.mik.habitstatsserver.service.TryCatchService.tryFunction;
 
 
 @Service
-@AllArgsConstructor
 public class StatCategoryService {
 
-    @Autowired
     StatCategoryRepository categoryRepository;
+
+    public StatCategoryService(@Autowired StatCategoryRepository categoryRepository) {
+        this.categoryRepository = categoryRepository;
+    }
 
     public List<StatCategory> listAllCategory() {
         return categoryRepository.findAll();
     }
 
-    public StatCategory getCategoryById(Integer id){
+    public StatCategory getCategoryById(Long id){
         return categoryRepository.findById(id).get();
     }
 
@@ -32,7 +34,7 @@ public class StatCategoryService {
         return tryFunction(() -> categoryRepository.save(statCategory));
     }
 
-    public String deleteCategory(Integer id) {
+    public String deleteCategory(Long id) {
         return tryFunction(() -> categoryRepository.deleteById(id));
     }
 }

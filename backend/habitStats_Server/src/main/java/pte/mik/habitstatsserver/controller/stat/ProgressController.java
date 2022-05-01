@@ -10,12 +10,14 @@ import pte.mik.habitstatsserver.service.stat.ProgressService;
 import java.util.List;
 
 @RestController
-@AllArgsConstructor
 @RequestMapping("/api/progress")
 public class ProgressController {
 
-    @Autowired
-    private ProgressService progressService;
+    private final ProgressService progressService;
+
+    public ProgressController(@Autowired ProgressService progressService) {
+        this.progressService = progressService;
+    }
 
     @GetMapping
     public List<Progress> listAll(){
@@ -24,7 +26,7 @@ public class ProgressController {
 
 
     @GetMapping("/stat/{id}")
-    public List<Progress> getByStatId(@PathVariable("id") Integer statId){return progressService.getByStatId(statId);}
+    public List<Progress> getByStatId(@PathVariable("id") Long statId){return progressService.getByStatId(statId);}
     
     @PostMapping
     public String create(@RequestBody ActionProgressDto progress){
@@ -37,7 +39,7 @@ public class ProgressController {
     }
 
     @DeleteMapping
-    public String deleteById(Integer id){
+    public String deleteById(Long id){
         return progressService.deleteById(id);
     }
 }
