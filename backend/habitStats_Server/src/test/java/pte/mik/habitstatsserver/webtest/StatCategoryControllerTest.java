@@ -43,7 +43,7 @@ public class StatCategoryControllerTest {
     @Test
     @Transactional
     public void delete() throws Exception{
-        Integer idActedOn = latestCategory().getId();
+        Long idActedOn = latestCategory().getId();
         assertThat(controller.deleteCategory(idActedOn)).isEqualTo("Done!");
     }
 

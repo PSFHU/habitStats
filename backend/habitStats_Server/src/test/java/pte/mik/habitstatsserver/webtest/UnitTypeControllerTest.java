@@ -37,13 +37,13 @@ public class UnitTypeControllerTest {
     @Test
     public void read() throws Exception{
         assertThat(controller.getById(latestUnitType().getId()).getId()).isEqualTo(repository.getById(latestUnitType().getId()).getId());
-        assertThat(controller.listAll().stream().map(UnitType::getId).filter(integer -> integer.equals(latestUnitType().getId())).findFirst().isPresent());
+        assertThat(controller.listAll().stream().map(UnitType::getId).filter(Long -> Long.equals(latestUnitType().getId())).findFirst().isPresent());
     }
 
     @Test
     @Transactional
     public void delete() throws Exception{
-        Integer idActedOn = latestUnitType().getId();
+        Long idActedOn = latestUnitType().getId();
         assertThat(controller.delete(idActedOn)).isEqualTo("Done!");
         assertThat(repository.existsById(idActedOn)).isFalse();
     }

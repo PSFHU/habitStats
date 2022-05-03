@@ -48,7 +48,7 @@ public class StatControllerTest {
     @Test
     public void read() {
         assertThat(controller.getByStatId(latestStat().getId()).getId()).isEqualTo(latestStat().getId());
-        assertThat(controller.listAllStat().stream().map(Stat::getId).anyMatch(integer -> integer.equals(latestStat().getId()))).isTrue();
+        assertThat(controller.listAllStat().stream().map(Stat::getId).anyMatch(Long -> Long.equals(latestStat().getId()))).isTrue();
     }
 
     @Test
@@ -65,7 +65,7 @@ public class StatControllerTest {
     @Test
     @Transactional
     public void delete() {
-        Integer idActedOn = latestStat().getId();
+        Long idActedOn = latestStat().getId();
         assertThat(controller.deleteStat(idActedOn)).isEqualTo("Done!");
         assertThat(statRepository.existsById(idActedOn)).isFalse();
     }

@@ -26,8 +26,6 @@ public class ProgressControllerTest {
     @Autowired
     ProgressRepository progressRepository;
 
-    private final Integer testStatId = 1;
-
     @Test
     public void contextLoads() throws Exception {
         assertThat(controller).isNotNull();
@@ -36,21 +34,21 @@ public class ProgressControllerTest {
     @Test
     @Transactional
     public void create() throws Exception{
-        ActionProgressDto actionProgressDto = new ActionProgressDto(0,1,99f, Instant.now());
+        ActionProgressDto actionProgressDto = new ActionProgressDto(0L,1L,99f, Instant.now());
         assertThat(controller.create(actionProgressDto)).isEqualTo("Done!");
         assertThat(actionProgressDto.getTimestamp()).isIn(latestProgress().getTimestamp());
     }
 
     @Test
     public void read() throws Exception{
-        assertThat(controller.getByStatId(latestProgress().getStat().getId()).stream().map(Progress::getId).filter(integer -> integer.equals(latestProgress())).findFirst().isPresent());
-        assertThat(controller.listAll().stream().map(Progress::getId).filter(integer -> integer.equals(latestProgress())).findFirst().isPresent());
+        assertThat(controller.getByStatId(latestProgress().getStat().getId()).stream().map(Progress::getId).filter(Long -> Long.equals(latestProgress())).findFirst().isPresent());
+        assertThat(controller.listAll().stream().map(Progress::getId).filter(Long -> Long.equals(latestProgress())).findFirst().isPresent());
     }
 
     @Test
     @Transactional
     public void update() throws Exception{
-        ActionProgressDto actionProgressDto = new ActionProgressDto(latestProgress().getId(),1,88f, Instant.now());
+        ActionProgressDto actionProgressDto = new ActionProgressDto(latestProgress().getId(),1L,88f, Instant.now());
 
         assertThat(controller.edit(actionProgressDto)).isEqualTo("Done!");
         assertThat(actionProgressDto.getValue()).isEqualTo(latestProgress().getValue());
@@ -59,12 +57,13 @@ public class ProgressControllerTest {
     @Test
     @Transactional
     public void delete() throws Exception{
-        Integer idActedOn = latestProgress().getId();
+        Long idActedOn = latestProgress().getId();
         assertThat(controller.deleteById(idActedOn)).isEqualTo("Done!");
         assertThat(progressRepository.existsById(idActedOn)).isFalse();
     }
 
     private Progress latestProgress(){
+        Long testStatId = 1L;
         return controller.getByStatId(testStatId).stream().max(Comparator.comparing(Progress::getId)).get();
     }
 }
