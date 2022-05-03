@@ -30,6 +30,7 @@ public class Stat extends AbstractEntity<Long>{
     @OneToMany(mappedBy = "stat", fetch = FetchType.LAZY)
     private List<Progress> progressList;
 
+    //TODO Multiple mapping issue
     @JsonManagedReference
     @ManyToMany(cascade = {CascadeType.ALL})
     @JoinTable(

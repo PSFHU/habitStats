@@ -11,5 +11,5 @@ public class CreateGoalDto implements Serializable {
     private final Float value;
     private final String logic;
     private final Boolean completed;
-    private final List<Integer> statListIds;
+    private final List<Long> statListIds;
 }

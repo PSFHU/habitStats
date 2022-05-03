@@ -1,9 +1,8 @@
 spring:
   application:
     name: @artifactId@
-  config:
-    activate:
-      on-profile: dev
+  profiles:
+    active: dev
 
 server:
   port: 8085
@@ -11,7 +10,8 @@ server:
 ---
 spring:
   config:
-    name: dev
+    activate:
+      on-profile: dev
   datasource:
     url: jdbc:h2:mem:mik
     driverClassName: org.h2.Driver
@@ -44,7 +44,8 @@ springdoc:
 ---
 spring:
   config:
-    name: dev-postgres
+    activate:
+      on-profile: dev-postgres
   datasource:
     url: jdbc:postgresql://localhost:5432/postgres?schema=public
     username: postgres
@@ -77,4 +78,5 @@ springdoc:
 ---
 spring:
   config:
-    name: prod
+    activate:
+      on-profile: prod
