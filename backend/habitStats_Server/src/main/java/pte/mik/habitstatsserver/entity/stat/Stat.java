@@ -5,8 +5,8 @@ import javax.persistence.*;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
+import pte.mik.habitstatsserver.entity.user.User;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -21,36 +21,40 @@ public class Stat extends AbstractEntity<Long>{
 
     public static final String TBL_NAME="stat";
     public static final String FLD_TITLE="stat_name";
-    public static final String CON_GOAL_LIST="goal_stat";
+    public static final String FLD_UNIT_TYPE_ID="unit_type_id";
+    public static final String FLD_STAT_CAT_ID="stat_category_id";
+    public static final String FLD_USER_ID="user_id";
+    public static final String JN_GOAL_LIST="goal_stat";
+    public static final String JN_FLD_STAT_ID="stat_id";
+    public static final String JN_FLD_GOAL_ID="goal_id";
+
 
     @Column(name = FLD_TITLE)
     private String title;
 
     @JsonManagedReference
-    @OneToMany(mappedBy = "stat", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = TBL_NAME, fetch = FetchType.LAZY)
+    @ToString.Exclude
     private List<Progress> progressList;
 
-    //TODO Multiple mapping issue
     @JsonManagedReference
-    @ManyToMany(cascade = {CascadeType.ALL})
+    @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)
     @JoinTable(
-            name = CON_GOAL_LIST,
-            joinColumns = { @JoinColumn(name = Stat.FLD_ID)},
-            inverseJoinColumns = { @JoinColumn(name = Goal.FLD_ID)}
+            name = JN_GOAL_LIST,
+            joinColumns = { @JoinColumn(name = JN_FLD_STAT_ID)},
+            inverseJoinColumns = { @JoinColumn(name = JN_FLD_GOAL_ID)}
     )
     private List<Goal> goalList;
 
-    /*@ManyToOne
-    @JoinColumn(name = "user_id")
-    @Getter
-    @Setter
-    private User user;*/
+    @ManyToOne
+    @JoinColumn(name = FLD_USER_ID)
+    private User user;
 
     @ManyToOne
-    @JoinColumn(name = StatCategory.FLD_ID)
+    @JoinColumn(name = FLD_STAT_CAT_ID)
     private StatCategory category;
 
     @ManyToOne
-    @JoinColumn(name = UnitType.FLD_ID)
+    @JoinColumn(name = FLD_UNIT_TYPE_ID)
     private UnitType unit_type;
 }

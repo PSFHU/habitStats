@@ -1,43 +1,44 @@
-/*
-package pte.mik.habitstatsserver.entity;
+package pte.mik.habitstatsserver.entity.user;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
-import javax.annotation.processing.Generated;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
+import pte.mik.habitstatsserver.entity.stat.AbstractEntity;
+import pte.mik.habitstatsserver.entity.stat.Stat;
 import javax.persistence.*;
 import java.util.List;
 
+@Data
+@EqualsAndHashCode(callSuper = true)
+@ToString(callSuper = false)
+@NoArgsConstructor
 @Entity
-@Table(name = "users")
-public class User {
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@SuperBuilder
+@Table(name = User.TBL_NAME)
+public class User extends AbstractEntity<Long> {
 
-    @Id
-    @Getter
-    @Setter
-    private Integer id;
-    @Getter
-    @Setter
+    public static final String TBL_NAME="users";
+    public static final String FLD_USERNAME="username";
+    public static final String FLD_PASSWORD="password";
+    public static final String JN_TABLE_NAME="user_role";
+    public static final String JN_FLD_USER_ID="user_id";
+    public static final String JN_FLD_ROLE_ID="role_id";
+
+    @Column(name = User.FLD_USERNAME)
     private String username;
-    @Getter
-    @Setter
+    @JsonIgnoreProperties
+    @Column(name = User.FLD_PASSWORD)
     private String password;
 
     @ManyToMany(cascade = { CascadeType.ALL})
     @JoinTable(
-            name = "user_role",
-            joinColumns = {  @JoinColumn(name = "user_id")},
-            inverseJoinColumns = { @JoinColumn(name = "role_id")}
+            name = User.JN_TABLE_NAME,
+            joinColumns = {  @JoinColumn(name = User.JN_FLD_USER_ID)},
+            inverseJoinColumns = { @JoinColumn(name = User.JN_FLD_ROLE_ID)}
     )
-    @Getter
-    @Setter
     private List<Role> roles;
 
-    @OneToMany(mappedBy = "user")
-    @Getter
-    @Setter
+    @OneToMany(mappedBy = Stat.TBL_NAME)
     private List<Stat> stats;
 }
-*/

@@ -21,7 +21,7 @@ public class Goal extends AbstractEntity<Long>{
     public static final String FLD_TITLE="title";
     public static final String FLD_VALUE="goal_value";
     public static final String FLD_LOGIC="goal_logic";
-    public static final String FLD_COMPLETED="goal";
+    public static final String FLD_COMPLETED="goal_completed";
 
     @Column(name = FLD_TITLE)
     private String title;
